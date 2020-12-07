@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "baseUrl": "./"
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
