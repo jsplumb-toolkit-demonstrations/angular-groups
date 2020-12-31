@@ -4,6 +4,8 @@
 
 This demonstration is a clone of the Groups demo, but using the Toolkit's Angular integration, with Angular CLI. 
 
+![Groups Demo](demo-groups-app.png)
+
 <a name="package"></a>
 
 ### package.json
