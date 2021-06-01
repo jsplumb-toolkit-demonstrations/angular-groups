@@ -1,7 +1,7 @@
 import {Component, ElementRef, Input} from '@angular/core';
 import {jsPlumbService } from "@jsplumbtoolkit/angular"
 import * as SyntaxHighlighter from "@jsplumb/json-syntax-highlighter"
-import {JsPlumbToolkit} from "@jsplumbtoolkit/core"
+import {BrowserUI} from "@jsplumbtoolkit/browser-ui"
 
 
 @Component({
@@ -9,7 +9,7 @@ import {JsPlumbToolkit} from "@jsplumbtoolkit/core"
   template:'<div class="jtk-demo-dataset"></div>'
 })
 export class DatasetComponent {
-  toolkit:JsPlumbToolkit;
+  toolkit:BrowserUI;
 
   @Input() toolkitId:string;
 

@@ -1,6 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { Surface, BrowserUI } from "@jsplumbtoolkit/browser-ui"
+import {Surface, BrowserUI, EVENT_CANVAS_CLICK} from "@jsplumbtoolkit/browser-ui"
 import { jsPlumbSurfaceComponent, jsPlumbService } from "@jsplumbtoolkit/angular"
+
+import { DEFAULT, BlankEndpoint, AnchorLocations, ArrowOverlay } from "@jsplumb/core"
+import { AbsoluteLayout } from "@jsplumbtoolkit/core"
+import {StateMachineConnector} from "@jsplumb/connector-bezier"
 
 class BaseNodeComponent {
     toolkit:BrowserUI;
@@ -118,21 +122,21 @@ export class AppComponent {
 
     view = {
         nodes:{
-            "default":{
+            [DEFAULT]:{
                 component:NodeComponent
             }
         },
         groups:{
-            "default":{
+            [DEFAULT]:{
                 component:GroupComponent,
-                endpoint:"Blank",
-                anchor:"Continuous",
+                endpoint:BlankEndpoint.type,
+                anchor:AnchorLocations.Continuous,
                 revert:false,
                 orphan:true,
                 constrain:false
             },
             constrained:{
-                parent:"default",
+                parent:DEFAULT,
                 constrain:true
             }
         }
@@ -140,21 +144,21 @@ export class AppComponent {
 
     renderParams = {
         layout:{
-            type:"Absolute"
+            type:AbsoluteLayout.type
         },
         events: {
-            canvasClick: (e:Event) => {
+            [EVENT_CANVAS_CLICK]: (e:Event) => {
                 this.toolkit.clearSelection()
             }
         },
-        jsPlumb: {
-            anchor:"Continuous",
-            endpoint: "Blank",
-            connector: { type:"StateMachine", options:{ cssClass: "connectorClass", hoverClass: "connectorHoverClass" } },
+        defaults: {
+            anchor:AnchorLocations.Continuous,
+            endpoint: BlankEndpoint.type,
+            connector: { type:StateMachineConnector.type, options:{ cssClass: "connectorClass", hoverClass: "connectorHoverClass" } },
             paintStyle: { strokeWidth: 1, stroke: '#89bcde' },
             hoverPaintStyle: { stroke: "orange" },
-            overlays: [
-                { type: "Arrow", options:{ fill: "#09098e", width: 10, length: 10, location: 1 } }
+            connectionOverlays: [
+                { type: ArrowOverlay.type, options:{ fill: "#09098e", width: 10, length: 10, location: 1 } }
             ]
         },
         lassoFilter: ".controls, .controls *, .miniview, .miniview *",
