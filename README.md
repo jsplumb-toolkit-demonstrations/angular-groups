@@ -38,7 +38,6 @@ This demonstration is a clone of the Groups demo, but using the Toolkit's Angula
     "jsplumbtoolkit-demo-support": "file:../../jsplumbtoolkit-demo-support.tgz",
     "jsplumbtoolkit-drop": "file:../../jsplumbtoolkit-drop.tgz",
     "jsplumbtoolkit-syntax-highlighter": "file:../../jsplumbtoolkit-syntax-highlighter.tgz",
-    "jsplumbtoolkit-undo-redo": "file:../../jsplumbtoolkit-undo-redo.tgz",
     "core-js": "^2.4.1",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.0.0-rc.0",
@@ -72,7 +71,6 @@ There are seven entries specific to jsPlumb:
   "jsplumbtoolkit-demo-support": "file:../../jsplumbtoolkit-demo-support.tgz",  // support code for toolkit demos
   "jsplumbtoolkit-drop": "file:../../jsplumbtoolkit-drop.tgz",                  // drag/drop manager
   "jsplumbtoolkit-syntax-highlighter": "file:../../jsplumbtoolkit-syntax-highlighter.tgz", // used to show the current dataset
-  "jsplumbtoolkit-undo-redo": "file:../../jsplumbtoolkit-undo-redo.tgz",        // undo/redo manager
 }
 ```
 

@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import {Surface, BrowserUI, EVENT_CANVAS_CLICK} from "@jsplumbtoolkit/browser-ui"
-import { jsPlumbSurfaceComponent, jsPlumbService } from "@jsplumbtoolkit/angular"
-
 import { DEFAULT, BlankEndpoint, AnchorLocations, ArrowOverlay } from "@jsplumb/core"
+import { jsPlumbSurfaceComponent, jsPlumbService } from "@jsplumbtoolkit/angular"
 import { AbsoluteLayout } from "@jsplumbtoolkit/core"
 import {StateMachineConnector} from "@jsplumb/connector-bezier"
 
