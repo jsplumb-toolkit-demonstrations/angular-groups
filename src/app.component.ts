@@ -1,15 +1,16 @@
-import { Component, ViewChild } from '@angular/core';
-import {Surface, BrowserUI, EVENT_CANVAS_CLICK} from "@jsplumbtoolkit/browser-ui"
-import { DEFAULT, BlankEndpoint, AnchorLocations, ArrowOverlay } from "@jsplumb/core"
-import { jsPlumbSurfaceComponent, jsPlumbService } from "@jsplumbtoolkit/angular"
-import { AbsoluteLayout } from "@jsplumbtoolkit/core"
-import {StateMachineConnector} from "@jsplumb/connector-bezier"
+import { Component, ViewChild } from '@angular/core'
+import {Surface, EVENT_CANVAS_CLICK} from '@jsplumbtoolkit/browser-ui'
+import { BlankEndpoint, ArrowOverlay } from '@jsplumb/core'
+import { DEFAULT, AnchorLocations } from '@jsplumb/common'
+import { BrowserUIAngular, jsPlumbSurfaceComponent, jsPlumbService } from '@jsplumbtoolkit/browser-ui-angular'
+import { AbsoluteLayout } from '@jsplumbtoolkit/core'
+import {StateMachineConnector} from '@jsplumb/connector-bezier'
 
 class BaseNodeComponent {
-    toolkit:BrowserUI;
-    surface:Surface;
-    _el:any;
-    obj:any;
+    toolkit:BrowserUIAngular
+    surface:Surface
+    _el:any
+    obj:any
 
     ngAfterViewInit() {
         this.surface.jsplumb.revalidate(this._el)
@@ -84,7 +85,7 @@ export class AppComponent {
 
     @ViewChild(jsPlumbSurfaceComponent) surfaceComponent:jsPlumbSurfaceComponent;
 
-    toolkit:BrowserUI
+    toolkit:BrowserUIAngular
     surface:Surface
 
     toolkitId:string
