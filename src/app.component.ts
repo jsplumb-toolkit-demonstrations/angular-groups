@@ -1,15 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
-import { jsPlumb, jsPlumbToolkit, Surface } from "jsplumbtoolkit";
-import { jsPlumbSurfaceComponent, jsPlumbService } from "jsplumbtoolkit-angular";
+import { Component, ViewChild } from '@angular/core'
+import {Surface, EVENT_CANVAS_CLICK, BlankEndpoint, ArrowOverlay, DEFAULT, AnchorLocations} from '@jsplumbtoolkit/browser-ui'
+import { BrowserUIAngular, jsPlumbSurfaceComponent, jsPlumbService } from '@jsplumbtoolkit/browser-ui-angular'
+import { AbsoluteLayout } from '@jsplumbtoolkit/core'
+import {StateMachineConnector} from '@jsplumb/connector-bezier'
 
 class BaseNodeComponent {
-    toolkit:jsPlumbToolkit;
-    surface:Surface;
-    _el:any;
-    obj:any;
+    toolkit:BrowserUIAngular
+    surface:Surface
+    _el:any
+    obj:any
 
     ngAfterViewInit() {
-        this.surface.getJsPlumb().revalidate(this._el);
+        this.surface.jsplumb.revalidate(this._el)
     }
 }
 
@@ -81,11 +83,11 @@ export class AppComponent {
 
     @ViewChild(jsPlumbSurfaceComponent) surfaceComponent:jsPlumbSurfaceComponent;
 
-    toolkit:jsPlumbToolkit;
-    surface:Surface;
+    toolkit:BrowserUIAngular
+    surface:Surface
 
-    toolkitId:string;
-    surfaceId:string;
+    toolkitId:string
+    surfaceId:string
 
     constructor(private $jsplumb:jsPlumbService) {
         this.toolkitId = "demo";
@@ -101,38 +103,38 @@ export class AppComponent {
         {label: "Group", type: "group", group:true }
     ];
 
-    toolkitParams = {
+    toolkitParams:any = {
         groupFactory:(type:string, data:any, callback:Function) => {
-            data.title = "Group " + (this.toolkit.getGroupCount() + 1);
-            callback(data);
+            data.title = "Group " + (this.toolkit.getGroupCount() + 1)
+            callback(data)
         },
         nodeFactory:(type:string, data:any, callback:Function) => {
-            data.name = (this.toolkit.getNodeCount() + 1);
-            callback(data);
+            data.name = (this.toolkit.getNodeCount() + 1)
+            callback(data)
         }
-    };
+    }
 
     toggleSelection(node:any) {  
-        this.toolkit.toggleSelection(node);
+        this.toolkit.toggleSelection(node)
     }
 
     view = {
         nodes:{
-            "default":{
+            [DEFAULT]:{
                 component:NodeComponent
             }
         },
         groups:{
-            "default":{
+            [DEFAULT]:{
                 component:GroupComponent,
-                endpoint:"Blank",
-                anchor:"Continuous",
+                endpoint:BlankEndpoint.type,
+                anchor:AnchorLocations.Continuous,
                 revert:false,
                 orphan:true,
                 constrain:false
             },
             constrained:{
-                parent:"default",
+                parent:DEFAULT,
                 constrain:true
             }
         }
@@ -140,21 +142,21 @@ export class AppComponent {
 
     renderParams = {
         layout:{
-            type:"Absolute"
+            type:AbsoluteLayout.type
         },
         events: {
-            canvasClick: (e:Event) => {
-                this.toolkit.clearSelection();
+            [EVENT_CANVAS_CLICK]: (e:Event) => {
+                this.toolkit.clearSelection()
             }
         },
-        jsPlumb: {
-            Anchor:"Continuous",
-            Endpoint: "Blank",
-            Connector: [ "StateMachine", { cssClass: "connectorClass", hoverClass: "connectorHoverClass" } ],
-            PaintStyle: { strokeWidth: 1, stroke: '#89bcde' },
-            HoverPaintStyle: { stroke: "orange" },
-            Overlays: [
-                [ "Arrow", { fill: "#09098e", width: 10, length: 10, location: 1 } ]
+        defaults: {
+            anchor:AnchorLocations.Continuous,
+            endpoint: BlankEndpoint.type,
+            connector: { type:StateMachineConnector.type, options:{ cssClass: "connectorClass", hoverClass: "connectorHoverClass" } },
+            paintStyle: { strokeWidth: 1, stroke: '#89bcde' },
+            hoverPaintStyle: { stroke: "orange" },
+            connectionOverlays: [
+                { type: ArrowOverlay.type, options:{ fill: "#09098e", width: 10, length: 10, location: 1 } }
             ]
         },
         lassoFilter: ".controls, .controls *, .miniview, .miniview *",
@@ -165,13 +167,13 @@ export class AppComponent {
     };
 
     dataGenerator(el:Element) {
-        return { type:el.getAttribute("data-node-type") };
+        return { type:el.getAttribute("data-node-type") }
     }
 
     ngAfterViewInit() {
 
-        this.surface = this.surfaceComponent.surface;
-        this.toolkit = this.surface.getToolkit();
+        this.surface = this.surfaceComponent.surface
+        this.toolkit = this.surface.toolkitInstance
         this.toolkit.load({
             data : {
                 "groups":[
@@ -198,9 +200,9 @@ export class AppComponent {
             },
             onload:() => {
                 this.surface.centerContent();
-                this.surface.repaintEverything();
+                this.surface.repaintEverything()
             }
-        });
+        })
     }
 
 }

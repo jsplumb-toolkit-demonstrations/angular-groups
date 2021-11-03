@@ -1,6 +1,5 @@
-@import "../node_modules/@jsplumb/json-syntax-highlighter/jsplumbtoolkit-syntax-highlighter.css";
-@import "../node_modules/jsplumbtoolkit/dist/css/jsplumbtoolkit.css";
-@import "../node_modules/@jsplumb/toolkit-demo-support/jsplumbtoolkit-demo-support.css";
+@import "../node_modules/@jsplumbtoolkit/browser-ui/css/jsplumbtoolkit.css";
+@import "../node_modules/@jsplumbtoolkit/browser-ui/css/jsplumbtoolkit-demo-support.css";
 
 jsplumb-demo {
     width:100%;
