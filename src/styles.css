@@ -44,6 +44,7 @@ jsplumb-miniview {
     border-radius:3px;
     min-width:100px;
     padding:10px;
+    z-index:11;
 }
 
 .jtk-group {
