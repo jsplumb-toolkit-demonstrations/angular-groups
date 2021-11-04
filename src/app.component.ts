@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core'
-import {Surface, EVENT_CANVAS_CLICK, BlankEndpoint, ArrowOverlay, DEFAULT, AnchorLocations} from '@jsplumbtoolkit/browser-ui'
+import {EVENT_TAP, EVENT_CLICK, Surface, EVENT_CANVAS_CLICK, BlankEndpoint, ArrowOverlay, DEFAULT, AnchorLocations } from '@jsplumbtoolkit/browser-ui'
 import { BrowserUIAngular, jsPlumbSurfaceComponent, jsPlumbService } from '@jsplumbtoolkit/browser-ui-angular'
-import { AbsoluteLayout } from '@jsplumbtoolkit/core'
+import { Node, Group, AbsoluteLayout } from '@jsplumbtoolkit/core'
 import {StateMachineConnector} from '@jsplumb/connector-bezier'
 
 class BaseNodeComponent {
@@ -121,7 +121,12 @@ export class AppComponent {
     view = {
         nodes:{
             [DEFAULT]:{
-                component:NodeComponent
+                component:NodeComponent,
+                events: {
+                    [EVENT_TAP]: (params:{el:Element, obj:Node, renderer:Surface, e:Event, toolkit:BrowserUIAngular}) => {
+                        this.toolkit.toggleSelection(params.obj);
+                    }
+                }
             }
         },
         groups:{
@@ -131,7 +136,16 @@ export class AppComponent {
                 anchor:AnchorLocations.Continuous,
                 revert:false,
                 orphan:true,
-                constrain:false
+                constrain:false,
+                autoSize:true,
+                layout:{
+                    type:AbsoluteLayout.type
+                },
+                events:{
+                    [EVENT_CLICK]:(p:{el:Element, obj:Group, renderer:Surface, e:Event, toolkit:BrowserUIAngular}) => {
+                        console.log(p)
+                    }
+                }
             },
             constrained:{
                 parent:DEFAULT,
@@ -178,7 +192,8 @@ export class AppComponent {
             data : {
                 "groups":[
                     {"id":"one", "title":"Group 1", "left":100, top:50 },
-                    {"id":"two", "title":"Group 2", "left":450, top:250, type:"constrained"  }
+                    {"id":"two", "title":"Group 2", "left":750, top:250, type:"constrained"  },
+                    {"id":"three", "title":"Nested Group", "left":50, "top":50, "group":"two"  }
                 ],
                 "nodes": [
                     { "id": "window1", "name": "1", "left": 10, "top": 20, group:"one" },
@@ -186,16 +201,16 @@ export class AppComponent {
                     { "id": "window3", "name": "3", "left": 450, "top": 50 },
                     { "id": "window4", "name": "4", "left": 110, "top": 370 },
                     { "id": "window5", "name": "5", "left": 140, "top": 150, group:"one" },
-                    { "id": "window6", "name": "6", "left": 50, "top": 50, group:"two" },
+                    { "id": "window6", "name": "6", "left": 450, "top": 50, group:"two" },
                     { "id": "window7", "name": "7", "left": 50, "top": 450 }
                 ],
                 "edges": [
-                    { "source": "window1", "target": "window3" },
-                    { "source": "window1", "target": "window4" },
-                    { "source": "window3", "target": "window5" },
-                    { "source": "window5", "target": "window2" },
-                    { "source": "window4", "target": "window6" },
-                    { "source": "window6", "target": "window2" }
+                    { source:"window3", target:"one"},
+                    { source:"window3", target:"window4"},
+                    { source:"one", target:"two"},
+                    { source:"window5", target:"window6"},
+                    { source:"window1", target:"window2"},
+                    { source:"window1", target:"window5"}
                 ]
             },
             onload:() => {
