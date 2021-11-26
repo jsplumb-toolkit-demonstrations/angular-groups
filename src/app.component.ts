@@ -55,7 +55,7 @@ export class GroupComponent extends BaseNodeComponent {
                  surfaceId="demoSurface"
                  [dataGenerator]="dataGenerator">
 
-                <div *ngFor="let nodeType of draggableTypes" [attr.data-node-type]="nodeType.type" title="Drag to add new" [attr.jtk-is-group]="nodeType.group" class="sidebar-item">
+                <div *ngFor="let nodeType of draggableTypes" [attr.data-node-type]="nodeType.type" title="Drag to add new" [attr.data-jtk-is-group]="nodeType.group" class="sidebar-item">
                     {{nodeType.label}}
                 </div>
             </div>
