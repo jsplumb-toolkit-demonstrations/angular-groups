@@ -6,7 +6,6 @@
     "module": "es2020",
     "moduleResolution": "node",
     "sourceMap": true,
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
       "es2015",
