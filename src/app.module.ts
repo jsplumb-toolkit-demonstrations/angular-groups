@@ -5,11 +5,10 @@ import { jsPlumbToolkitModule } from '@jsplumbtoolkit/browser-ui-angular'
 import { jsPlumbToolkitDragDropModule } from '@jsplumbtoolkit/browser-ui-angular-drop'
 
 @NgModule({
-    imports:      [ BrowserModule, jsPlumbToolkitModule, jsPlumbToolkitDragDropModule ],
-    declarations: [ AppComponent, NodeComponent, GroupComponent ],
-    bootstrap:    [ AppComponent ],
-    entryComponents: [ NodeComponent, GroupComponent ],
-    schemas:[ CUSTOM_ELEMENTS_SCHEMA ]
+    imports: [BrowserModule, jsPlumbToolkitModule, jsPlumbToolkitDragDropModule],
+    declarations: [AppComponent, NodeComponent, GroupComponent],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { 
     constructor() { }
