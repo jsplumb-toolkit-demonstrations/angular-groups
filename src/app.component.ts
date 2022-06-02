@@ -1,9 +1,10 @@
-import { Component, ViewChild } from '@angular/core'
+import { Component, ViewChild, Directive } from '@angular/core'
 import {EVENT_TAP, EVENT_CLICK, Surface, EVENT_CANVAS_CLICK, BlankEndpoint, ArrowOverlay, DEFAULT, AnchorLocations } from '@jsplumbtoolkit/browser-ui'
 import { BrowserUIAngular, jsPlumbSurfaceComponent, jsPlumbService } from '@jsplumbtoolkit/browser-ui-angular'
 import { Node, Group, AbsoluteLayout } from '@jsplumbtoolkit/core'
 import {StateMachineConnector} from '@jsplumb/connector-bezier'
 
+@Directive()
 class BaseNodeComponent {
     toolkit:BrowserUIAngular
     surface:Surface
